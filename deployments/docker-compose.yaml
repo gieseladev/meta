@@ -15,11 +15,14 @@ services:
         - ../configs/crossbar-config.json:/node/.crossbar/config.json
 
   wampus:
+    command:         --config /config.yaml
     container_name:  wampus
     image:           gieseladev/wampus
     networks:
         - wamp
     restart:         unless-stopped
+    volumes:
+        - ../configs/wampus.yaml:/config.yaml
 
   andesite:
     container_name:  andesite
@@ -28,19 +31,20 @@ services:
     image:           natanbc/andesite:master
     networks:
         - ari
-    ports:
-        - 2800:2800
     restart:         unless-stopped
     volumes:
         - ../configs/andesite-config.conf:/andesite/application.conf
 
   ari:
+    command:         --config /config.yaml
     container_name:  ari
     image:           gieseladev/ari
     networks:
         - ari
         - wamp
     restart:         unless-stopped
+    volumes:
+        - ../configs/ari.yaml:/config.yaml
 
 networks:
     ari:             {}

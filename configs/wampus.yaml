@@ -1,0 +1,6 @@
+discord:
+  token: nil  # REQUIRED
+
+wamp:
+  url: tcp://router:8333
+  realm: internal

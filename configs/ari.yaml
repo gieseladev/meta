@@ -1,0 +1,13 @@
+realm: internal
+
+transports:
+  - type: rawsocket
+    url: rs://router:8333
+
+redis:
+  address: nil  # REQUIRED
+
+andesite:
+  user_id: nil  # REQUIRED
+  nodes:
+    - url: ws://andesite:2800/websocket
