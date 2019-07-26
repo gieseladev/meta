@@ -1,0 +1,47 @@
+version:             "3.7"
+
+services:
+  router:
+    container_name:  crossbar
+    expose:
+        - 8333
+    image:           crossbario/crossbar
+    networks:
+        - wamp
+    ports:
+        - 8333:8333
+    restart:         unless-stopped
+    volumes:
+        - ../configs/crossbar-config.json:/node/.crossbar/config.json
+
+  wampus:
+    container_name:  wampus
+    image:           gieseladev/wampus
+    networks:
+        - wamp
+    restart:         unless-stopped
+
+  andesite:
+    container_name:  andesite
+    expose:
+        - 2800
+    image:           natanbc/andesite:master
+    networks:
+        - ari
+    ports:
+        - 2800:2800
+    restart:         unless-stopped
+    volumes:
+        - ../configs/andesite-config.conf:/andesite/application.conf
+
+  ari:
+    container_name:  ari
+    image:           gieseladev/ari
+    networks:
+        - ari
+        - wamp
+    restart:         unless-stopped
+
+networks:
+    ari:             {}
+    wamp:            {}

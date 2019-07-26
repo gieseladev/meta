@@ -1,0 +1,44 @@
+{
+	"version": 2,
+	"workers": [
+		{
+			"type": "router",
+			"realms": [
+				{
+					"name": "internal",
+					"roles": [
+						{
+							"name": "anonymous",
+							"permissions": [
+								{
+									"uri": "",
+									"match": "prefix",
+									"cache": true,
+									"allow": {
+										"call": true,
+										"register": true,
+										"publish": true,
+										"subscribe": true
+									},
+									"disclose": {
+										"caller": false,
+										"publisher": false
+									}
+								}
+							]
+						}
+					]
+				}
+			],
+			"transports": [
+				{
+					"type": "rawsocket",
+					"endpoint": {
+						"type": "tcp",
+						"port": 8333
+					}
+				}
+			]
+		}
+	]
+}
